@@ -1,10 +1,9 @@
 /**
- * This is the main entrypoint to your Probot app
  * @param {import('probot').Probot} app
  */
- module.exports = (app) => {
-  app.on(["issues.opened"], async (context) => {
-
+module.exports = (app) => {
+  app.on("issues.opened", async (context) => {
+    
     const owner = context.payload.issue.user.login
     const repo = context.payload.repository.name
     const issueNumber = context.payload.issue.number

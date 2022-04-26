@@ -1,26 +1,45 @@
 {
-  "name": "githubbot",
+  "name": "codeedit-github-action",
   "version": "1.0.0",
   "private": true,
-  "description": "CodeEditApp Bot",
+  "description": "CodeEdit Github Action",
   "scripts": {
-    "start": "probot run ./app.js",
-    "test": "node test.js"
+    "test": "node test/app.test.js",
+    "build": "ncc build index.js -o dist"
   },
   "author": "Nanashi Li",
   "license": "ISC",
-  "repository": "https://github.com/CodeEditApp/GitHubBot",
+  "repository": "github:nanashili/CodeEdit-Github-Action",
   "dependencies": {
-    "probot": "^12.2.2"
+    "@probot/adapter-github-actions": "^3.1.1"
   },
   "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@zeit/ncc": "^0.22.3",
+    "semantic-release": "^19.0.2",
     "nock": "^13.2.4",
-    "smee-client": "^1.2.2",
     "uvu": "^0.5.3"
   },
   "release": {
     "branches": [
       "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "dist/index.js"
+          ],
+          "message": "build(release): compiled action for ${nextRelease.version}\n\n[skip ci]"
+        }
+      ],
+      "@semantic-release/github"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

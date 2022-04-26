@@ -1,8 +1,8 @@
 name: CodeEdit Github Action
 description: "CodeEdit Github Action"
 branding:
-  icon: "gift"
-  color: orange
+  icon: "bot"
+  color: blue
 runs:
   using: "node12"
   main: "dist/index.js"
